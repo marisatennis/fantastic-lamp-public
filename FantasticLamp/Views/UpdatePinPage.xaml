@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasticLamp.Views.UpdatePinPage"
+             Shell.PresentationMode="ModalAnimated"
+             xmlns:local="clr-namespace:FantasticLamp.ViewModels"  
+             Title="Update Location"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{StaticResource LightBackground}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="OneDataTemplate">
+                <StackLayout Padding="5">
+                    <Grid Padding="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="150" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Row="0" Style="{StaticResource ItemsRectangle}" Fill="#e86af0"/>
+                        <Ellipse Grid.Row="0" Style="{StaticResource MoodItemEllipse}"/>
+                        <Label Grid.Row="0" Text="{Binding Name}" Style="{StaticResource MoodItemLabelName}" />
+                        <Label Grid.Row="0" Text="{Binding Emoji}" Style="{StaticResource MoodItemLabelEmoji}" />
+                    </Grid>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="TwoDataTemplate">
+                <StackLayout Padding="5">
+                    <Grid Padding="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="150" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Row="0" Style="{StaticResource ItemsRectangle}" Fill="#07d8c9"/>
+                        <Ellipse Grid.Row="0" Style="{StaticResource MoodItemEllipse}"/>
+                        <Label Grid.Row="0" Text="{Binding Name}" Style="{StaticResource MoodItemLabelName}" />
+                        <Label Grid.Row="0" Text="{Binding Emoji}" Style="{StaticResource MoodItemLabelEmoji}" />
+                    </Grid>
+                </StackLayout>
+            </DataTemplate>
+            <local:MoodDataTemplateSelector x:Key="moodDataTemplateSelector" OneDataTemplate="{StaticResource OneDataTemplate}" TwoDataTemplate="{StaticResource TwoDataTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <RefreshView x:DataType="local:UpdatePinViewModel" Command="{Binding LoadLocationsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <StackLayout>
+            <CollectionView x:Name="LocationsListView"
+                ItemsSource="{Binding Locations}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedLocation, Mode=TwoWay}"
+                ItemTemplate="{StaticResource moodDataTemplateSelector}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,40,5,0">
+                <ImageButton Source="icon_save.png" Command="{Binding SaveCommand}" Style="{StaticResource MoodItemEditImageButton}"></ImageButton>
+                <ImageButton Source="icon_cancel.png" Command="{Binding CancelCommand}" Style="{StaticResource MoodItemEditImageButton}"></ImageButton>
+            </StackLayout>
+        </StackLayout>
+    </RefreshView>
+</ContentPage>

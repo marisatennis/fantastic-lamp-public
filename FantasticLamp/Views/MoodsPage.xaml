@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasticLamp.Views.MoodsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:FantasticLamp.ViewModels"  
+             xmlns:model="clr-namespace:FantasticLamp.Models"  
+             x:Name="BrowseMoodsPage"
+             BackgroundColor="{StaticResource Background}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_add_emoji.png" Command="{Binding AddMoodCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="OneDataTemplate">
+                <StackLayout Padding="5">
+                    <Grid Padding="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="150" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Row="0" Style="{StaticResource ItemsRectangle}" Fill="#e86af0"/>
+                        <Ellipse Grid.Row="0" Style="{StaticResource MoodItemEllipse}"/>
+                        <Label Grid.Row="0" Text="{Binding Name}" Style="{StaticResource MoodItemLabelName}" />
+                        <Label Grid.Row="0" Text="{Binding Emoji}" Style="{StaticResource MoodItemLabelEmoji}" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    NumberOfTapsRequired="1"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:MoodsViewModel}}, Path=MoodTapped}"		
+                                    CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                            <TapGestureRecognizer
+                                    NumberOfTapsRequired="2"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:MoodsViewModel}}, Path=MoodDoubleTapped}"		
+                                    CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="TwoDataTemplate">
+                <StackLayout Padding="5">
+                    <Grid Padding="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="150" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Row="0" Style="{StaticResource ItemsRectangle}" Fill="#07d8c9"/>
+                        <Ellipse Grid.Row="0" Style="{StaticResource MoodItemEllipse}"/>
+                        <Label Grid.Row="0" Text="{Binding Name}" Style="{StaticResource MoodItemLabelName}" />
+                        <Label Grid.Row="0" Text="{Binding Emoji}" Style="{StaticResource MoodItemLabelEmoji}" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:MoodsViewModel}}, Path=MoodTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                            <TapGestureRecognizer
+                                NumberOfTapsRequired="2"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:MoodsViewModel}}, Path=MoodDoubleTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </StackLayout>
+            </DataTemplate>
+            <local:MoodDataTemplateSelector x:Key="moodDataTemplateSelector" OneDataTemplate="{StaticResource OneDataTemplate}" TwoDataTemplate="{StaticResource TwoDataTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <RefreshView x:DataType="local:MoodsViewModel" Command="{Binding LoadMoodsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="MoodsListView" ItemsSource="{Binding Moods}" ItemTemplate="{StaticResource moodDataTemplateSelector}" EmptyView="{Binding Moods}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.EmptyViewTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="😕"
+                                   FontSize="Header"
+                                   Style="{StaticResource EmptyViewLabelText}" />
+                        <Label Text="Ooops No Records !" Style="{StaticResource EmptyViewLabelText}"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.EmptyViewTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

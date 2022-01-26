@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasticLamp.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Background">#052b42</Color>
+            <Color x:Key="LightBackground">#80052b42</Color>
+            <Color x:Key="Primary">#ff7208</Color>
+            <Color x:Key="Secondary">#1d848e</Color>
+            <Color x:Key="Third">#07d8c9</Color>
+            <Color x:Key="Fourth">#e86af0</Color>
+            <Color x:Key="Fifth">#fffc80</Color>
+            <Color x:Key="Sixth">#ffffff</Color>
+            <Color x:Key="LightThird">#8007d8c9</Color>
+
+            <x:String x:Key="BodyFont">JosefinSlab-Bold</x:String>
+
+            <Style x:Key="CategoryButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Sixth}"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="BorderWidth" Value="2"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="MinimumWidthRequest" Value="130"></Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Background}" />
+                                    <Setter Property="BorderColor" Value="{StaticResource Fourth}" />
+                                    <Setter Property="TextColor" Value="{StaticResource Fourth}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Third}" />
+                                    <Setter Property="BorderColor" Value="{StaticResource Third}" />
+                                    <Setter Property="TextColor" Value="{StaticResource Sixth}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Background}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="FilterOptionButton" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                <Setter Property="HeightRequest" Value="30"></Setter>
+                <Setter Property="Padding" Value="4,0,4,0"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource Sixth}"></Setter>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="UnSelectedCategory">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource Sixth}"></Setter>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Fourth}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="SelectedFilter">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource Background}"></Setter>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="FilterButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Sixth}"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontSize" Value="Micro"></Setter>
+                <Setter Property="BorderWidth" Value="2"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource Background}" />
+                <Setter Property="BorderColor" Value="{StaticResource Sixth}" />
+                <Setter Property="HeightRequest" Value="10"></Setter>
+                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"></Setter>
+            </Style>
+
+            <Style x:Key="TopLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Fifth}"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontSize" Value="25"></Setter>
+                <Setter Property="LineBreakMode" Value="NoWrap"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource LightThird}"></Setter>
+            </Style>
+
+            <Style x:Key="ItemsRectangle" TargetType="Rectangle">
+                <Setter Property="StrokeLineJoin" Value="Round"></Setter>
+                <Setter Property="RadiusX" Value="10"></Setter>
+                <Setter Property="RadiusY" Value="10"></Setter>
+                <Setter Property="Margin" Value="5,0,5,0"></Setter>
+            </Style>
+
+            <Style x:Key="MoodItemEllipse" TargetType="Ellipse">
+                <Setter Property="Fill" Value="#052b42"></Setter>
+                <Setter Property="HeightRequest" Value="80"></Setter>
+                <Setter Property="WidthRequest" Value="50"></Setter>
+                <Setter Property="Margin" Value="45,50,45,10"></Setter>
+            </Style>
+
+            <Style x:Key="MoodItemLabelName" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="NoWrap"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource Background}"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontSize" Value="40"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
+                <Setter Property="Margin" Value="0,2,0,0"></Setter>
+            </Style>
+
+            <Style x:Key="MoodItemLabelEmoji" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="NoWrap"></Setter>
+                <Setter Property="TextColor" Value="Yellow"></Setter>
+                <Setter Property="FontSize" Value="70"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="Margin" Value="0,32,0,0"></Setter>
+            </Style>
+
+            <Style x:Key="MoodItemEditLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Primary}"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+            </Style>
+
+            <Style x:Key="MoodItemEditEntry" TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource Sixth}"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                <Setter Property="WidthRequest" Value="200"></Setter>
+                <Setter Property="IsSpellCheckEnabled" Value="True"></Setter>
+                <Setter Property="ClearButtonVisibility" Value="WhileEditing"></Setter>
+            </Style>
+
+            <Style x:Key="MoodItemEditRectangle" TargetType="Rectangle">
+                <Setter Property="Stroke" Value="#1d848e"></Setter>
+                <Setter Property="StrokeThickness" Value="10"></Setter>
+                <Setter Property="RadiusX" Value="5"></Setter>
+                <Setter Property="RadiusY" Value="5"></Setter>
+                <Setter Property="WidthRequest" Value="100"></Setter>
+                <Setter Property="Margin" Value="0,20,0,170"></Setter>
+            </Style>
+
+            <Style x:Key="MoodItemEditImageButton" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="End"></Setter>
+                <Setter Property="HeightRequest" Value="50"></Setter>
+            </Style>
+
+            <Style x:Key="ScrollViewfilterCategories" TargetType="ScrollView">
+                <Setter Property="Orientation" Value="Horizontal"></Setter>
+                <Setter Property="HorizontalOptions" Value="Fill"></Setter>
+                <Setter Property="Padding" Value="0"></Setter>
+            </Style>
+
+            <Style x:Key="SearchBarFilters" TargetType="SearchBar">
+                <Setter Property="HorizontalOptions" Value="Fill"></Setter>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+                <Setter Property="Placeholder" Value="Search and click enter or the magnifiying glass..."></Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource Sixth}"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontSize" Value="Small"></Setter>
+                <Setter Property="HeightRequest" Value="30"></Setter>
+            </Style>
+
+            <Style x:Key="ListViewSearchBar" TargetType="ListView">
+                <Setter Property="HorizontalOptions" Value="Fill"></Setter>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+                <Setter Property="SeparatorColor" Value="{StaticResource Sixth}"></Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"></Setter>
+            </Style>
+
+            <Style x:Key="SearchItemLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Sixth}"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="HeightRequest" Value="20"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="Padding" Value="2"></Setter>
+            </Style>
+
+            <Style x:Key="EmptyViewLabelText" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Sixth}"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="Margin" Value="10,25,10,10"></Setter>
+                <Setter Property="HorizontalOptions" Value="Fill"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            </Style>
+
+        </ResourceDictionary>        
+    </Application.Resources>
+</Application>

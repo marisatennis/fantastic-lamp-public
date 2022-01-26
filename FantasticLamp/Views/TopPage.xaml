@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasticLamp.Views.TopPage"
+             Title="{Binding Title}"
+             x:Name="BrowseTopPage"
+             BackgroundColor="{StaticResource Background}"
+             xmlns:model="clr-namespace:FantasticLamp.Models" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_filter.png" Clicked="ShowFilters"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Spacing="0">
+            <ScrollView x:Name="filterCategoriesScrollView" Style="{StaticResource ScrollViewfilterCategories}" IsVisible="False" BackgroundColor="{StaticResource Fourth}">
+                <StackLayout x:Name="filterCategoriesStackLayout" Orientation="Horizontal">
+                </StackLayout>
+            </ScrollView>
+            <ScrollView x:Name="filterOptionsScrollView" Style="{StaticResource ScrollViewfilterCategories}" IsVisible="False" BackgroundColor="{StaticResource Secondary}">
+                <StackLayout x:Name="filterOptionsStackLayout" Orientation="Horizontal">
+                    <StackLayout x:Name="searchStacklayout" Orientation="Vertical" IsVisible="False" HeightRequest="200">
+                        <SearchBar x:Name="searchBar" Style="{StaticResource SearchBarFilters}"
+                            SearchButtonPressed="OnSearchButtonPressed"/>
+                        <ListView x:Name="searchResults"
+                            ItemSelected="OnItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Label Text="{Binding Name}" Style="{StaticResource SearchItemLabel}"/>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <ScrollView x:Name="selectedfiltersScrollView" Orientation="Horizontal"
+                    HorizontalOptions="Center" IsVisible="False">
+                <StackLayout x:Name="selectedfiltersStackLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand" Padding="2" HeightRequest="25">
+                </StackLayout>
+            </ScrollView>
+            <StackLayout x:Name="categoriesStacklayout" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="6" >
+                <Button Text="Artists" Clicked="Category_Button_Clicked" Command="{Binding LoadTopArtistsCommand}" Style="{StaticResource CategoryButton}"/>
+                <Button Text="Albums" Clicked="Category_Button_Clicked" Command="{Binding LoadTopAlbumsCommand}" Style="{StaticResource CategoryButton}"/>
+                <Button Text="Songs" Clicked="Category_Button_Clicked" Command="{Binding LoadTopSongsCommand}" Style="{StaticResource CategoryButton}"/>
+            </StackLayout>
+            <CollectionView ItemsSource="{Binding PlayGroups}" EmptyView="{Binding PlayGroups}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="5" x:DataType="model:PlayGroup">
+                            <Grid Padding="8">
+                                <Rectangle x:Name="rectangle" Grid.Row="0" Style="{StaticResource ItemsRectangle}" Stroke="#07d8c9" StrokeThickness="10" />
+                                <Image Grid.Row="0" Source="{Binding ImageURL}"
+                                       Margin="12,12,12,12"
+                                       HeightRequest="30"
+                                       WidthRequest="30"/>
+                                <Label Grid.Row="0" Text="{Binding Name}" Margin="10,110,10,30" Style="{StaticResource TopLabel}"/>
+                                <!--<Label Grid.Row="0" Text="{Binding Plays}"
+                                        LineBreakMode="NoWrap"
+                                        FontSize="15" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10,135,10,10"
+                                        Style="{StaticResource TopLabel}"/>-->
+                            </Grid>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="😕"
+                                   FontSize="Header"
+                                   Style="{StaticResource EmptyViewLabelText}" />
+                            <Label Text="Ooops No Records !" Style="{StaticResource EmptyViewLabelText}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

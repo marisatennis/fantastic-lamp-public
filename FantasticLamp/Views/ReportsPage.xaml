@@ -1,0 +1,61 @@
+﻿<ContentPage
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+        x:Class="FantasticLamp.Views.ReportsPage"
+        Title="{Binding Title}"
+        BackgroundColor="{StaticResource Background}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_filter.png" Clicked="ShowFilters"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Spacing="0">
+            <ScrollView x:Name="filterCategoriesScrollView" Style="{StaticResource ScrollViewfilterCategories}" IsVisible="False" BackgroundColor="{StaticResource Fourth}">
+                <StackLayout x:Name="filterCategoriesStackLayout" Orientation="Horizontal">
+                </StackLayout>
+            </ScrollView>
+            <ScrollView x:Name="filterOptionsScrollView" Style="{StaticResource ScrollViewfilterCategories}" IsVisible="False" BackgroundColor="{StaticResource Secondary}">
+                <StackLayout x:Name="filterOptionsStackLayout" Orientation="Horizontal">
+                    <StackLayout x:Name="searchStacklayout" Orientation="Vertical" IsVisible="False" HeightRequest="200">
+                        <SearchBar x:Name="searchBar" Style="{StaticResource SearchBarFilters}"
+                            SearchButtonPressed="OnSearchButtonPressed"/>
+                        <ListView x:Name="searchResults"
+                            ItemSelected="OnItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Label Text="{Binding Name}" Style="{StaticResource SearchItemLabel}"/>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <ScrollView x:Name="selectedfiltersScrollView" Orientation="Horizontal"
+                    HorizontalOptions="Center" IsVisible="False">
+                <StackLayout x:Name="selectedfiltersStackLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand" Padding="2" HeightRequest="25">
+                </StackLayout>
+            </ScrollView>
+            <StackLayout x:Name="categoriesStacklayout" Orientation="Horizontal" HorizontalOptions="Center" Padding="6" >
+                <Button Text="Time" Clicked="Category_Button_Clicked" Style="{StaticResource CategoryButton}"/>
+                <Button Text="Locations" Clicked="Category_Button_Clicked" Command="{Binding LoadLocationsCommand}" Style="{StaticResource CategoryButton}"/>
+                <Button Text="Moods" Clicked="Category_Button_Clicked" Command="{Binding LoadMoodsCommand}" Style="{StaticResource CategoryButton}"/>
+            </StackLayout>
+            <StackLayout x:Name="timeStackLayout" Orientation="Horizontal" IsVisible="False" Background="{StaticResource Fourth}" >
+                <Button Text="Months" Clicked="Time_Button_Clicked" Command="{Binding LoadMonthsCommand}" Style="{StaticResource FilterOptionButton}"/>
+                <Button Text="WeekDays" Clicked="Time_Button_Clicked" Command="{Binding LoadWeekDaysCommand}" Style="{StaticResource FilterOptionButton}"/>
+                <Button Text="Hours" Clicked="Time_Button_Clicked" Command="{Binding LoadHoursCommand}" Style="{StaticResource FilterOptionButton}"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" x:Name="chart1Stacklayout" HeightRequest="350" VerticalOptions="CenterAndExpand" >
+                <microcharts:ChartView x:Name="chartView" MinimumHeightRequest="350" VerticalOptions="FillAndExpand" IsVisible="True" />
+                <StackLayout x:Name="emptyViewStacklayout" Orientation="Vertical" IsVisible="False">
+                    <Label Text="😕"
+                           FontSize="Header"
+                           Style="{StaticResource EmptyViewLabelText}" />
+                    <Label Text="Ooops No Records !" Style="{StaticResource EmptyViewLabelText}"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

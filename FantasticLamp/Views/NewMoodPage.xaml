@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasticLamp.Views.NewMoodPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="New Mood"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{StaticResource LightBackground}"
+             Padding="0,100,0,50">
+    <ContentPage.Content>
+        <Grid>
+            <Rectangle Style="{StaticResource MoodItemEditRectangle}"/>
+            <StackLayout Spacing="3" Padding="15" Margin="0,50,0,0">
+                <Label Text="Name" Style="{StaticResource MoodItemEditLabel}" />
+                <Entry Text="{Binding Name, Mode=TwoWay}"  Style="{StaticResource MoodItemEditEntry}"/>
+                <Label Text="Emoji" Style="{StaticResource MoodItemEditLabel}" />
+                <Entry Text="{Binding Emoji, Mode=TwoWay}"  Style="{StaticResource MoodItemEditEntry}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,40,5,0">
+                    <ImageButton Source="icon_save.png" Command="{Binding SaveCommand}" Style="{StaticResource MoodItemEditImageButton}"></ImageButton>
+                    <ImageButton Source="icon_cancel.png" Command="{Binding CancelCommand}" Style="{StaticResource MoodItemEditImageButton}"></ImageButton>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
